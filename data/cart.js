@@ -65,6 +65,14 @@ export function updateDeliveryOption(productId, deliveryOptionId) {
   })
 
   matchingItem.deliveryOptionId = deliveryOptionId;
-  console.log("HI");
   saveToStorage();
 } 
+
+export function totalCartQuantity() {
+  let cartQuantity = 0;
+  cart.forEach((cartItrm) => {
+    cartQuantity += cartItrm.quantity;
+  })
+
+  return cartQuantity;
+}
