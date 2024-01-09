@@ -3,6 +3,7 @@ import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 
 let totalHTML = "";
+updateCartQuantity();
 
 products.forEach((productObject) => {
     let htmlString = 
@@ -45,7 +46,7 @@ products.forEach((productObject) => {
 
     <div class="product-spacer"></div>
 
-    <div class="added-to-cart">
+    <div class="added-to-cart js-added-to-cart-msg-${productObject.id} added-hidden">
       <img src="images/icons/checkmark.png">
       Added
     </div>
@@ -61,7 +62,7 @@ products.forEach((productObject) => {
 document.querySelector(".products-grid").innerHTML = totalHTML;
 
 function updateCartQuantity() {
-  let cartQuantity = totalCartQuantity();
+  const cartQuantity = totalCartQuantity();
   document.querySelector(".cart-quantity").innerHTML = cartQuantity;
 }
 
@@ -69,6 +70,16 @@ document.querySelectorAll(".js-add-to-cart-button")
   .forEach((button) => {
     button.addEventListener("click", () => {
       let productId = button.dataset.productId;
+
+      let addedMsg = document.querySelector(`.js-added-to-cart-msg-${productId}`);
+      addedMsg.style.opacity = 1;
+      addedMsg.classList.remove("added-hidden");
+
+      setTimeout(function () {
+        addedMsg.style.opacity = 0;
+        addedMsg.classList.add("added-hidden")
+      }, 2000);
+
       addToCart(productId);
       updateCartQuantity();
     })

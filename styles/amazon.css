@@ -144,6 +144,10 @@
   opacity: 0;
 }
 
+.added-hidden{
+  transition: opacity 1s;
+}
+
 .added-to-cart img {
   height: 20px;
   margin-right: 5px;
